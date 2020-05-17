@@ -30,10 +30,11 @@ def mainpage():
   return header + body + footer
 
 @app.route('/monster/<name>')
-def get_identicon( name ):
+def get_identicon(name):
+
   image = cache.get(name)
   if image is None:
-    print('Cache miss', flush=true)
+    print('Cache miss', flush=True)
     r = requests.get('http://dnmonster:8080/monster/' + name + '?size=80')
     image = r.content
     cache.set(name, image)
